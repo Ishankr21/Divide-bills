@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/tripsFragment">
+
+    <fragment
+        android:id="@+id/tripsFragment"
+        android:name="com.example.splitter.Fragment.TripsFragment"
+        android:label="Trips"
+        tools:layout="@layout/fragment_trips" >
+        <action
+            android:id="@+id/action_tripsFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_tripsFragment_to_particulatTrip"
+            app:destination="@id/particulatTrip" />
+        <action
+            android:id="@+id/action_tripsFragment_to_addNameFragment"
+            app:destination="@id/addNameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.example.splitter.Fragment.AddFragment"
+        android:label="Add Trip"
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_addFragment_to_tripsFragment"
+            app:destination="@id/tripsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/particulatTrip"
+        android:name="com.example.splitter.Fragment.ParticulatTrip"
+        android:label="Triping"
+        tools:layout="@layout/fragment_particulat_trip" >
+        <action
+            android:id="@+id/action_particulatTrip_to_addNameFragment"
+            app:destination="@id/addNameFragment" />
+        <argument
+            android:name="currentUser"
+            app:argType="com.example.splitter.entities.Trip" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNameFragment"
+        android:name="com.example.splitter.Fragment.AddNameFragment"
+        android:label="AddName"
+        tools:layout="@layout/fragment_add_name" >
+        <action
+            android:id="@+id/action_addNameFragment_to_particulatTrip"
+            app:destination="@id/particulatTrip" />
+        <argument
+            android:name="currentUser"
+            app:argType="com.example.splitter.entities.Trip" />
+    </fragment>
+</navigation>
