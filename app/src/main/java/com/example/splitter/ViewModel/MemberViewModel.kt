@@ -11,20 +11,35 @@ import com.example.splitter.entities.Members
 import com.example.splitter.entities.Trip
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
-//yahan bhi id parameter pass kiye h
-class MemberViewModel(application: Application,id:Int): AndroidViewModel(application) {
+
+class MemberViewModel(application: Application): AndroidViewModel(application) {
     val allMembers: LiveData<List<Members>>
+
     val repo: MemberRepositiry
     init {
         val dao= TripDatabase.getDatabase(application).getMemberDao()
-        repo= MemberRepositiry(dao,id)
+        repo= MemberRepositiry(dao)
         allMembers=repo.totalMembers
+
     }
     fun insertMember(member: Members)=viewModelScope.launch(Dispatchers.IO) {
         repo.insert(member)
 
 
     }
+    fun deleteMember(member: Members)=viewModelScope.launch(Dispatchers.IO) {
+        repo.deleteMember(member)
+
+
+    }
+    fun updateUser(member: Members)=viewModelScope.launch {
+        repo.updateMember(member)
+    }
+    fun getAllMembers(id:Int):List<Members> = runBlocking{
+         repo.getSelectedMembers(id)
+    }
+
 
 }

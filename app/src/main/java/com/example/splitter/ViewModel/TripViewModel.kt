@@ -3,9 +3,11 @@ package com.example.splitter.ViewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.splitter.Database.TripDatabase
 import com.example.splitter.Repository.TripRepository
+import com.example.splitter.entities.Members
 import com.example.splitter.entities.Trip
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,6 +24,14 @@ class TripViewModel(application: Application): AndroidViewModel(application) {
         repo.insert(trip)
 
 
+    }
+    fun deleteTrip(trip:Trip)=viewModelScope.launch(Dispatchers.IO) {
+        repo.deleteTrip(trip)
+
+
+    }
+    fun searchDatabase(searchQuery: String): LiveData<List<Trip>> {
+        return repo.searchDatabase(searchQuery).asLiveData()
     }
 
 }

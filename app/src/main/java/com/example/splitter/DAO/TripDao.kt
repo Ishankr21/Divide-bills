@@ -1,11 +1,9 @@
 package com.example.splitter.DAO
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.splitter.entities.Trip
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TripDao {
@@ -13,8 +11,13 @@ interface TripDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertUsers(trip:Trip)
-    @Query("SELECT * FROM Trip ORDER BY tid ASC")
+    @Query("SELECT * FROM Trip order by tid ASC")
     fun getAllTrips() : LiveData<List<Trip>>
+    @Query("SELECT * FROM trip WHERE trip_name LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String): Flow<List<Trip>>
+    @Delete
+    suspend fun deleteTrip(trip:Trip)
+
 
 
 }

@@ -25,7 +25,7 @@ class AddNameFragment : Fragment() {
     private var _binding: FragmentAddNameBinding? = null
     lateinit var viewModel: MemberViewModel
     private val binding get() = _binding!!
-    lateinit var adapter: MemberAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,10 +44,12 @@ class AddNameFragment : Fragment() {
         val name=binding.EdMemberName.text.toString()
         if(inputChecker(name))
         {
-            var newMenber=Members(0,name,args.currentUser.tid)
+            var temp:Int=args.currentUser.tid
+            var newMenber=Members(0,name,temp,0.0)
             viewModel.insertMember(newMenber)
             Toast.makeText(requireContext(),"Member Entered ",Toast.LENGTH_LONG).show()
-            findNavController().navigate(R.id.action_addNameFragment_to_particulatTrip)
+            val action= AddNameFragmentDirections.actionAddNameFragmentToParticulatTrip(args.currentUser)
+            findNavController().navigate(action)
         }
         else
         {

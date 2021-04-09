@@ -40,6 +40,12 @@
         <argument
             android:name="currentUser"
             app:argType="com.example.splitter.entities.Trip" />
+        <action
+            android:id="@+id/action_particulatTrip_to_addExpense"
+            app:destination="@id/addExpense" />
+        <action
+            android:id="@+id/action_particulatTrip_to_calculateFragment"
+            app:destination="@id/calculateFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNameFragment"
@@ -49,6 +55,30 @@
         <action
             android:id="@+id/action_addNameFragment_to_particulatTrip"
             app:destination="@id/particulatTrip" />
+        <argument
+            android:name="currentUser"
+            app:argType="com.example.splitter.entities.Trip" />
+    </fragment>
+    <fragment
+        android:id="@+id/addExpense"
+        android:name="com.example.splitter.AddExpense"
+        android:label="fragment_add_expense"
+        tools:layout="@layout/fragment_add_expense" >
+        <argument
+            android:name="currentMember"
+            app:argType="com.example.splitter.entities.Members" />
+        <action
+            android:id="@+id/action_addExpense_to_particulatTrip"
+            app:destination="@id/particulatTrip" />
+        <argument
+            android:name="currentUser"
+            app:argType="com.example.splitter.entities.Trip" />
+    </fragment>
+    <fragment
+        android:id="@+id/calculateFragment"
+        android:name="com.example.splitter.CalculateFragment"
+        android:label="fragment_calculate"
+        tools:layout="@layout/fragment_calculate" >
         <argument
             android:name="currentUser"
             app:argType="com.example.splitter.entities.Trip" />

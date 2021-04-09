@@ -51,6 +51,10 @@ class TripAdapter:RecyclerView.Adapter<TripAdapter.TripsViewHolder>() {
         arrList.addAll(newList)
         notifyDataSetChanged()
     }
+    fun getTrip(pos:Int):Trip
+    {
+        return arrList[pos];
+    }
 
 
 }
